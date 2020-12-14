@@ -1,0 +1,119 @@
+## Simple grammar
+## 
+## Author: Nazareno Borello, Marco Galatola
+
+
+% start S
+############################
+# Grammar Rules
+#############################
+
+S[SEM = <?vp(?subj) & tense(?l,?t,?m) & ?pr1 & ?pr2>] -> NP[NUM=?n,PERS=?p,SEM=?subj,PROP=?pr1] VP[NUM=?n,PERS=?p,SEM=?vp,TNS=?t,MOD=?m,PROP=?pr2,LEX=?l]
+S[SEM = <?sv(?obj,NONE) & tense(?l,?t,norm) & ?adv(?l) & ?pr>] -> RB[SEM=?adv,LEX=<ci>] SV[NUM=?n1,PERS=?p,SEM=?sv,TNS=?t,LEX=?l] NP[NUM=?n1,PERS=?p,SEM=?obj,PROP=?pr]
+
+NP[NUM=?n,PERS=?p,SEM=?np,PROP=<pn(?np)>] -> PRP[NUM=?n,PERS=?p,SEM=?np]
+NP[NUM=<pl>,PERS=<3>,SEM=?np,PROP=?pr] -> N[NUM=<pl>,SEM=?np,PROP=?pr]
+NP[NUM=<sg>,PERS=<3>,SEM=?np,PROP=<udf(?np) & ?pr>] -> Det[NUM=?n] N[NUM=<sg>,SEM=?np,PROP=?pr]
+NP[NUM=?n,PERS=?p,SEM=?np,PROP=<udf(?np) & ?pr>] -> Det[NUM=?n] NP[NUM=?n,PERS=?p,SEM=?np,PROP=?pr]
+NP[NUM=?n,PERS=?p,SEM=?np,PROP=<?pr1 & ?pp(?np) & ?pr2>] -> NP[NUM=?n,PERS=?p,SEM=?np,PROP=?pr1] PP[SEM=?pp,PROP=?pr2]
+NP[NUM=?n,PERS=?p,SEM=?np,PROP=<?pr & ?jj(?np)>] -> JJ[SEM=?jj] NP[NUM=?n,PERS=?p,SEM=?np,PROP=?pr]
+NP[NUM=<sg>,PERS=<3>,SEM=?np,PROP=<?jj(?np) & ?pr>] -> JJ[SEM=?jj,TYPE=<poss>] N[NUM=<sg>,SEM=?np,PROP=?pr]
+N[NUM=<sg>,PERS=<3>,SEM=?np,PROP=<?jj(?np) & ?pr>] -> JJ[SEM=?jj,TYPE=<desc>] N[NUM=<sg>,SEM=?np,PROP=?pr]
+PP[SEM=<?p(?l)>,PROP=<adv(?l) & ?pr>] -> P[SEM=?p] RB[LEX=?l,PROP=?pr]
+PP[SEM=<?p(?np)>,PROP=?pr] -> P[SEM=?p] NP[SEM=?np,PROP=?pr]
+RB[SEM=?rb,PROP=<?pr1 & ?pp(?l) & ?pr2>] -> RB[SEM=?rb,LEX=?l, PROP=?pr1] PP[SEM=?pp,PROP=?pr2]
+
+
+VP[NUM=?n,PERS=?p,SEM=<?v(?obj)>,TNS=?t,MOD=<norm>,PROP=?pr,LEX=?l] -> TV[NUM=?n,PERS=?p,SEM=?v,TNS=?t,MOD=<norm>,LEX=?l] NP[SEM=?obj,PROP=?pr]
+VP[NUM=?n,PERS=?p,SEM=?v,TNS=?t,MOD=<norm>,PROP=<true>,LEX=?l] -> IV[NUM=?n,PERS=?p,SEM=?v,TNS=?t,MOD=<norm>,LEX=?l]
+VP[NUM=?n,PERS=?p,SEM=<?v(?obj)>,TNS=?t,MOD=<progr>,PROP=?pr,LEX=?l] -> SV[NUM=?n,PERS=?p,TNS=?t] TV[SEM=?v,MOD=<progr>,LEX=?l] NP[SEM=?obj,PROP=?pr]
+VP[NUM=?n,PERS=?p,SEM=?v,TNS=?t,MOD=<progr>,PROP=<true>,LEX=?l] -> SV[NUM=?n,PERS=?p,TNS=?t] IV[SEM=?v,MOD=<progr>,LEX=?l]
+VP[NUM=?n,PERS=?p,SEM=?v,TNS=?t,MOD=?m,PROP=<?pr1 & ?rb(?l) & ?pr2>,LEX=?l] -> VP[NUM=?n,PERS=?p,SEM=?v,TNS=?t,MOD=?m,PROP=?pr1,LEX=?l] RB[SEM=?rb, PROP=?pr2]
+VP[NUM=?n,PERS=?p,SEM=?v,TNS=?t,MOD=?m,PROP=<?pr1 & ?pp(?l) & ?pr2>,LEX=?l] -> VP[NUM=?n,PERS=?p,SEM=?v,TNS=?t,MOD=?m,PROP=?pr1,LEX=?l] PP[SEM=?pp, PROP=?pr2]
+
+#############################
+# Lexical Rules
+#############################
+
+PRP[NUM=<sg>,PERS=<1>,SEM=<io>] -> 'i'
+PRP[NUM=<sg>,PERS=<2>,SEM=<tu>] -> 'you'
+PRP[NUM=<sg>,PERS=<3>,SEM=<egli>] -> 'he'
+PRP[NUM=<sg>,PERS=<3>,SEM=<ella>] -> 'she'
+PRP[NUM=<sg>,PERS=<3>,SEM=<esso>] -> 'it'
+PRP[NUM=<pl>,PERS=<1>,SEM=<noi>] -> 'we'
+PRP[NUM=<pl>,PERS=<2>,SEM=<voi>] -> 'you'
+PRP[NUM=<pl>,PERS=<3>,SEM=<loro>] -> 'they'
+
+Det[NUM=<sg>] -> 'a'
+
+N[NUM=<sg>,SEM=<cosa>,PROP=<true>] -> 'thing'
+N[NUM=<pl>,SEM=<cosa>,PROP=<pl(cosa)>] -> 'things'
+N[NUM=<sg>,SEM=<prezzo>,PROP=<true>] -> 'price'
+N[NUM=<pl>,SEM=<prezzo>,PROP=<pl(prezzo)>] -> 'prices'
+N[NUM=<sg>,SEM=<testa>,PROP=<true>] -> 'head'
+N[NUM=<pl>,SEM=<testa>,PROP=<pl(testa)>] -> 'heads'
+N[NUM=<sg>,SEM=<occasione>,PROP=<true>] -> 'opportunity'
+N[NUM=<pl>,SEM=<occasione>,PROP=<pl(occasione)>] -> 'opportunities'
+
+RB[SEM=<\x.adv(x,ci)>,LEX=<ci>,PROP=<true>] -> 'there'
+RB[SEM=<\x.adv(x,qui)>,LEX=<qui>,PROP=<true>] -> 'here'
+RB[SEM=<\x.adv(x,fuori)>,LEX=<fuori>,PROP=<true>] -> 'out'
+
+SV[NUM=<sg>,PERS=<1>,SEM=<\x.(\y.essere(y,x))>,TNS=<pres>,LEX=<essere>] -> 'am'
+SV[NUM=<sg>,PERS=<2>,SEM=<\x.(\y.essere(y,x))>,TNS=<pres>,LEX=<essere>] -> 'are'
+SV[NUM=<sg>,PERS=<3>,SEM=<\x.(\y.essere(y,x))>,TNS=<pres>,LEX=<essere>] -> 'is'
+SV[NUM=<pl>,PERS=<1>,SEM=<\x.(\y.essere(y,x))>,TNS=<pres>,LEX=<essere>] -> 'are'
+SV[NUM=<pl>,PERS=<2>,SEM=<\x.(\y.essere(y,x))>,TNS=<pres>,LEX=<essere>] -> 'are'
+SV[NUM=<pl>,PERS=<3>,SEM=<\x.(\y.essere(y,x))>,TNS=<pres>,LEX=<essere>] -> 'are'
+
+SV[NUM=<sg>,PERS=<1>,SEM=<\x.(\y.essere(y,x))>,TNS=<past>,LEX=<essere>] -> 'was'
+SV[NUM=<sg>,PERS=<2>,SEM=<\x.(\y.essere(y,x))>,TNS=<past>,LEX=<essere>] -> 'were'
+SV[NUM=<sg>,PERS=<3>,SEM=<\x.(\y.essere(y,x))>,TNS=<past>,LEX=<essere>] -> 'was'
+SV[NUM=<pl>,PERS=<1>,SEM=<\x.(\y.essere(y,x))>,TNS=<past>,LEX=<essere>] -> 'were'
+SV[NUM=<pl>,PERS=<2>,SEM=<\x.(\y.essere(y,x))>,TNS=<past>,LEX=<essere>] -> 'were'
+SV[NUM=<pl>,PERS=<3>,SEM=<\x.(\y.essere(y,x))>,TNS=<past>,LEX=<essere>] -> 'were'
+
+IV[SEM=<\x.volare(x)>,MOD=<progr>,LEX=<volare>] -> 'flying'
+
+IV[NUM=<sg>,PERS=<1>,SEM=<\x.volare(x)>,TNS=<pres>,MOD=<norm>,LEX=<volare>] -> 'fly'
+IV[NUM=<sg>,PERS=<2>,SEM=<\x.volare(x)>,TNS=<pres>,MOD=<norm>,LEX=<volare>] -> 'fly'
+IV[NUM=<sg>,PERS=<3>,SEM=<\x.volare(x)>,TNS=<pres>,MOD=<norm>,LEX=<volare>] -> 'flies'
+IV[NUM=<pl>,PERS=<1>,SEM=<\x.volare(x)>,TNS=<pres>,MOD=<norm>,LEX=<volare>] -> 'fly'
+IV[NUM=<pl>,PERS=<2>,SEM=<\x.volare(x)>,TNS=<pres>,MOD=<norm>,LEX=<volare>] -> 'fly'
+IV[NUM=<pl>,PERS=<3>,SEM=<\x.volare(x)>,TNS=<pres>,MOD=<norm>,LEX=<volare>] -> 'fly'
+
+IV[NUM=<sg>,PERS=<1>,SEM=<\x.volare(x)>,TNS=<past>,MOD=<norm>,LEX=<volare>] -> 'flew'
+IV[NUM=<sg>,PERS=<2>,SEM=<\x.volare(x)>,TNS=<past>,MOD=<norm>,LEX=<volare>] -> 'flew'
+IV[NUM=<sg>,PERS=<3>,SEM=<\x.volare(x)>,TNS=<past>,MOD=<norm>,LEX=<volare>] -> 'flew'
+IV[NUM=<pl>,PERS=<1>,SEM=<\x.volare(x)>,TNS=<past>,MOD=<norm>,LEX=<volare>] -> 'flew'
+IV[NUM=<pl>,PERS=<2>,SEM=<\x.volare(x)>,TNS=<past>,MOD=<norm>,LEX=<volare>] -> 'flew'
+IV[NUM=<pl>,PERS=<3>,SEM=<\x.volare(x)>,TNS=<past>,MOD=<norm>,LEX=<volare>] -> 'flew'
+
+TV[SEM=<\x.(\y.immaginare(y,x))>,MOD=<progr>,LEX=<immaginare>] -> 'imagining'
+
+TV[NUM=<sg>,PERS=<1>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<pres>,MOD=<norm>,LEX=<immaginare>] -> 'imagine'
+TV[NUM=<sg>,PERS=<2>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<pres>,MOD=<norm>,LEX=<immaginare>] -> 'imagine'
+TV[NUM=<sg>,PERS=<3>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<pres>,MOD=<norm>,LEX=<immaginare>] -> 'imagines'
+TV[NUM=<pl>,PERS=<1>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<pres>,MOD=<norm>,LEX=<immaginare>] -> 'imagine'
+TV[NUM=<pl>,PERS=<2>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<pres>,MOD=<norm>,LEX=<immaginare>] -> 'imagine'
+TV[NUM=<pl>,PERS=<3>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<pres>,MOD=<norm>,LEX=<immaginare>] -> 'imagine'
+
+TV[NUM=<sg>,PERS=<1>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<past>,MOD=<norm>,LEX=<immaginare>] -> 'imagined'
+TV[NUM=<sg>,PERS=<2>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<past>,MOD=<norm>,LEX=<immaginare>] -> 'imagined'
+TV[NUM=<sg>,PERS=<3>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<past>,MOD=<norm>,LEX=<immaginare>] -> 'imagined'
+TV[NUM=<pl>,PERS=<1>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<past>,MOD=<norm>,LEX=<immaginare>] -> 'imagined'
+TV[NUM=<pl>,PERS=<2>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<past>,MOD=<norm>,LEX=<immaginare>] -> 'imagined'
+TV[NUM=<pl>,PERS=<3>,SEM=<\x.(\y.immaginare(y,x))>,TNS=<past>,MOD=<norm>,LEX=<immaginare>] -> 'imagined'
+
+JJ[SEM=<\x.desc(x,grande)>,TYPE=<desc>] -> 'big'
+JJ[SEM=<\x.poss(x,mio)>,TYPE=<poss>] -> 'my'
+JJ[SEM=<\x.poss(x,tuo)>,TYPE=<poss>] -> 'your'
+JJ[SEM=<\x.poss(x,suo)>,TYPE=<poss>] -> 'his'
+JJ[SEM=<\x.poss(x,suo)>,TYPE=<poss>] -> 'her'
+JJ[SEM=<\x.poss(x,suo)>,TYPE=<poss>] -> 'its'
+JJ[SEM=<\x.poss(x,nostro)>,TYPE=<poss>] -> 'our'
+JJ[SEM=<\x.poss(x,vostro)>,TYPE=<poss>] -> 'your'
+JJ[SEM=<\x.poss(x,loro)>,TYPE=<poss>] -> 'their'
+
+P[SEM=<\x.(\y.prep(y,x,su))>] -> 'on'
+P[SEM=<\x.(\y.prep(y,x,di))>] -> 'of'
