@@ -74,7 +74,7 @@ Di seguito le feature utilizzate:
 - **NUM** - Il numero del lessema (sg = singolare, pl = plurale);
 - **PERS** - La persona di un pronome (1, 2 o 3);
 - **TNS** - Il tempo di un verbo (pres = presente, past = passato);
-- **MOD** - Il modo di un verbo (norm = normale, progr = gerundio);
+- **MOD** - Il modo di un verbo (norm = indicativo, progr = gerundio);
 - **LEX** - Il lessema associato ad un elemento, utilizzato come riferimento per le lambda espressioni;
 - **TYPE** - Il tipo di un aggettivo (desc = qualitativo, poss = possessivo)
 - **PROP** - Le sfumature del significato di un nodo non rappresentate nella semantica.
