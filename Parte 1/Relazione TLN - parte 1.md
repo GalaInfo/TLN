@@ -87,7 +87,7 @@ Le proprietà possibili sono:
 - **desc(x, a)** - a è un aggettivo descrittivo riferito ad x (desc(occasione, grande) -> grande occasione);
 - **poss(x, a)** - a è un aggettivo possessivo riferito ad x (poss(testa, mio) -> mia testa);
 - **adv(x)** - x è un pronome utilizzato come nome (es. *qui* in *fuori di qui*);
-- **udf(x)** - x è un nome al quale è associato un articolo indeterminativo(es. udf(prezzo) -> un prezzo);
+- **udf(x)** - x è un nome al quale è associato un articolo indeterminativo (es. udf(prezzo) -> un prezzo);
 - **pn(x)** - x è un pronome.
 
 ## Regole lessicali
