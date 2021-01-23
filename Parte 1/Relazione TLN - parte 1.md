@@ -22,7 +22,7 @@ Per la generazione delle frasi italiane è stato utilizzato un Sentence Plan.
 
 Il progetto è costituito da tre componenti principali:
 
-- uno **script Python**  per la parsificazione della frase e la gestione dell'I\O;
+- uno **script Python**  per la parsificazione della frase e la gestione dell'I/O;
 
 - una **Feature Context Free Grammar**  per la definizione delle regole di traduzione da linguaggio naturale a forma logica;
 
@@ -38,7 +38,7 @@ parser = load_parser('res/grammar.fcfg')
 
 La frase, suddivisa per parole, viene passata al parser che produce tutti i possibili alberi semantici relativi ad essa.
 
-Da ogni albero viene estratta la semantica della radice, che consiste di una congiunzione di clausole in FOL, vengono considerate solo le logiche distinte.
+Da ogni albero viene estratta la semantica della radice, che consiste di una congiunzione di clausole in FOL.
 
 ```python
 tokens = sentence.split()
@@ -153,7 +153,7 @@ IV[NUM=<sg>,PERS=<2>,SEM=<\x.volare(x)>,TNS=<pres>,MOD=<norm>,LEX=<volare>] -> '
 S[SEM = <?vp(?subj) & tense(?l,?t,?m) & ?pr1 & ?pr2>] -> NP[NUM=?n,PERS=?p,SEM=?subj,PROP=?pr1] VP[NUM=?n,PERS=?p,SEM=?vp,TNS=?t,MOD=?m,PROP=?pr2,LEX=?l]
 ```
 
-**Caso particolare per prasi che iniziano con l'avverbio *ci***
+**Caso particolare per frasi che iniziano con l'avverbio *ci***
 
 ```jade
 S[SEM = <?sv(?obj,NONE) & tense(?l,?t,norm) & ?adv(?l) & ?pr>] -> RB[SEM=?adv,LEX=<ci>] SV[NUM=?n1,PERS=?p,SEM=?sv,TNS=?t,LEX=?l] NP[NUM=?n1,PERS=?p,SEM=?obj,PROP=?pr]
@@ -205,7 +205,7 @@ RB[SEM=?rb,PROP=<?pr1 & ?pp(?l) & ?pr2>] -> RB[SEM=?rb,LEX=?l, PROP=?pr1] PP[SEM
 
 L'applicativo Java è composto da due classi:
 
-- **NLG** (**N**atural **L**anguage **G**enerator) che si occupa dell'I\O;
+- **NLG** (**N**atural **L**anguage **G**enerator) che si occupa dell'I/O;
 - **LTS** (**L**ogic **T**o **S**entence) che si occupa di tradurre la logica in un Sentence Plan e di generare la frase.
 
 Per generare le frasi è stata usata la libreria Java [Simple NLG-it](https://github.com/alexmazzei/SimpleNLG-IT) a sua volta derivata da [Simple NLG](https://cdn.rawgit.com/simplenlg/simplenlg/master/docs/javadoc/index.html).
