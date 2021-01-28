@@ -318,7 +318,7 @@ for (String[] ref : refs) {
         }
         case "adv" ->
             adverb = true;
-            case "prep" -> {
+        case "prep" -> {
             PPPhraseSpec pp = factory.createPrepositionPhrase(ref[3], expandNP(ref[2]));
             np.addComplement(pp);
         }
